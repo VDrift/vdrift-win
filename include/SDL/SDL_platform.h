@@ -1,26 +1,29 @@
 /*
-    SDL - Simple DirectMedia Layer
-    Copyright (C) 1997-2006 Sam Lantinga
+  Simple DirectMedia Layer
+  Copyright (C) 1997-2012 Sam Lantinga <slouken@libsdl.org>
 
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
+  This software is provided 'as-is', without any express or implied
+  warranty.  In no event will the authors be held liable for any damages
+  arising from the use of this software.
 
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
+  Permission is granted to anyone to use this software for any purpose,
+  including commercial applications, and to alter it and redistribute it
+  freely, subject to the following restrictions:
 
-    You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Sam Lantinga
-    slouken@libsdl.org
+  1. The origin of this software must not be misrepresented; you must not
+     claim that you wrote the original software. If you use this software
+     in a product, an acknowledgment in the product documentation would be
+     appreciated but is not required.
+  2. Altered source versions must be plainly marked as such, and must not be
+     misrepresented as being the original software.
+  3. This notice may not be removed or altered from any source distribution.
 */
 
-/* Try to get a standard set of platform defines */
+/**
+ *  \file SDL_platform.h
+ *  
+ *  Try to get a standard set of platform defines.
+ */
 
 #ifndef _SDL_platform_h
 #define _SDL_platform_h
@@ -29,13 +32,13 @@
 #undef __AIX__
 #define __AIX__		1
 #endif
-#if defined(AMIGA) || defined(__AMIGA) || defined(__amigados__)
-#undef __AMIGA__
-#define __AMIGA__	1
-#endif
 #if defined(__BEOS__)
 #undef __BEOS__
 #define __BEOS__	1
+#endif
+#if defined(__HAIKU__)
+#undef __HAIKU__
+#define __HAIKU__	1
 #endif
 #if defined(bsdi) || defined(__bsdi) || defined(__bsdi__)
 #undef __BSDI__
@@ -45,7 +48,7 @@
 #undef __DREAMCAST__
 #define __DREAMCAST__	1
 #endif
-#if defined(__FreeBSD__) || defined(__DragonFly__)
+#if defined(__FreeBSD__) || defined(__FreeBSD_kernel__) || defined(__DragonFly__)
 #undef __FREEBSD__
 #define __FREEBSD__	1
 #endif
@@ -61,13 +64,28 @@
 #undef __LINUX__
 #define __LINUX__	1
 #endif
+#if defined(ANDROID)
+#undef __ANDROID__
+#undef __LINUX__ /*do we need to do this?*/
+#define __ANDROID__ 1
+#endif
+
 #if defined(__APPLE__)
+/* lets us know what version of Mac OS X we're compiling on */
+#include "AvailabilityMacros.h"
+#include "TargetConditionals.h"
+#if TARGET_OS_IPHONE
+/* if compiling for iPhone */
+#undef __IPHONEOS__
+#define __IPHONEOS__ 1
+#undef __MACOSX__
+#else
+/* if not compiling for iPhone */
 #undef __MACOSX__
 #define __MACOSX__	1
-#elif defined(macintosh)
-#undef __MACOS__
-#define __MACOS__	1
-#endif
+#endif /* TARGET_OS_IPHONE */
+#endif /* defined(__APPLE__) */
+
 #if defined(__NetBSD__)
 #undef __NETBSD__
 #define __NETBSD__	1
@@ -101,4 +119,33 @@
 #define __WIN32__	1
 #endif
 
+#if defined(__NDS__)
+#undef __NINTENDODS__
+#define __NINTENDODS__	1
+#endif
+
+
+#include "begin_code.h"
+/* Set up for C function definitions, even when using C++ */
+#ifdef __cplusplus
+/* *INDENT-OFF* */
+extern "C" {
+/* *INDENT-ON* */
+#endif
+
+/**
+ *  \brief Gets the name of the platform.
+ */
+extern DECLSPEC const char * SDLCALL SDL_GetPlatform (void);
+
+/* Ends C function definitions when using C++ */
+#ifdef __cplusplus
+/* *INDENT-OFF* */
+}
+/* *INDENT-ON* */
+#endif
+#include "close_code.h"
+
 #endif /* _SDL_platform_h */
+
+/* vi: set ts=4 sw=4 expandtab: */
