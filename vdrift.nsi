@@ -23,7 +23,7 @@
 SetCompressor /FINAL /SOLID lzma
 SetCompressorDictSize 64
 
-!define version "2011-10-22"
+!define version "2012-07-22"
 !define setup "vdrift-${version}.exe"
 
 ; change this to wherever the files to be packaged reside
@@ -170,11 +170,9 @@ Section "Install VDrift" SEC_VDRIFT
 	File /a /oname=libtiff.dll "${srcdir}\libtiff-3.dll"
 	File /a /oname=libz-1.dll "${srcdir}\libz-1.dll"
 	File /a /oname=ogg.dll "${srcdir}\ogg.dll"
-	File /a /oname=SDL.dll "${srcdir}\SDL.dll"
-	File /a /oname=SDL_gfx.dll "${srcdir}\SDL_gfx.dll"
-	File /a /oname=SDL_image.dll "${srcdir}\SDL_image.dll"
-	File /a /oname=SDL_mixer.dll "${srcdir}\SDL_mixer.dll"
-	File /a /oname=SDL_net.dll "${srcdir}\SDL_net.dll"
+	File /a /oname=SDL2.dll "${srcdir}\SDL2.dll"
+	File /a /oname=SDL2_gfx.dll "${srcdir}\SDL2_gfx.dll"
+	File /a /oname=SDL2_image.dll "${srcdir}\SDL2_image.dll"
 	File /a /oname=vorbis.dll "${srcdir}\vorbis.dll"
 	File /a /oname=vorbisfile.dll "${srcdir}\vorbisfile.dll"
 	File /a /oname=zlib1.dll "${srcdir}\zlib1.dll"
@@ -214,6 +212,7 @@ Section "Install VDrift" SEC_VDRIFT
      SetOutPath "$INSTDIR\data\tracks"
 		File /a /r /x .* /x SConscript /x vdrift-*x*.png "${srcdir}\data\tracks\bahrain"
 		File /a /r /x .* /x SConscript /x vdrift-*x*.png "${srcdir}\data\tracks\estoril88"
+		File /a /r /x .* /x SConscript /x vdrift-*x*.png "${srcdir}\data\tracks\garage"
 		;File /a /r /x .* /x SConscript /x vdrift-*x*.png "${srcdir}\data\tracks\hungaroring06"
 		File /a /r /x .* /x SConscript /x vdrift-*x*.png "${srcdir}\data\tracks\jerez88"
 		File /a /r /x .* /x SConscript /x vdrift-*x*.png "${srcdir}\data\tracks\lemans"
