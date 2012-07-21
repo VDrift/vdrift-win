@@ -165,7 +165,7 @@ Section "Install VDrift" SEC_VDRIFT
 	File /a /oname=libexpat-1.dll "${srcdir}\libexpat-1.dll"
 	File /a /oname=libgcc_s_dw2-1.dll "${srcdir}\libgcc_s_dw2-1.dll"
 	File /a /oname=liblzma-1.dll "${srcdir}\liblzma-1.dll"
-	File /a /oname=libpng12-0.dll "${srcdir}\libpng15-15.dll"
+	File /a /oname=libpng15-15.dll "${srcdir}\libpng15-15.dll"
 	File /a /oname=libz-1.dll "${srcdir}\libz-1.dll"
 	File /a /oname=ogg.dll "${srcdir}\ogg.dll"
 	File /a /oname=SDL2.dll "${srcdir}\SDL2.dll"
